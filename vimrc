@@ -36,6 +36,7 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/matchit.zip'
+Plugin 'joshdick/onedark.vim'
 
 filetype plugin indent on
 
@@ -248,10 +249,9 @@ endif
 if has("gui_running") || $TERM == "xterm-256color"
   set t_Co=256
   set background=dark " light
-  let base16colorspace=256 " Access colors present in 256 colorspace
   " colorscheme base16-default
   " colorscheme base16-ocean
-  colorscheme base16-tomorrow
+  colorscheme onedark
 else
   let g:CSApprox_loaded = 0
 endif
