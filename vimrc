@@ -138,6 +138,8 @@ set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay)
 set incsearch
 set hlsearch
 
+set ai
+
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
