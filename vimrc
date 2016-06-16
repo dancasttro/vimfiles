@@ -31,6 +31,7 @@ Plug 'tpope/vim-markdown'
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'rstacruz/vim-closer'
 
 call plug#end()
 
