@@ -30,6 +30,10 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'joshdick/onedark.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'mattn/emmet-vim'
+Plugin 'ap/vim-css-color'
+Plugin 'hail2u/vim-css3-syntax'
 
 filetype plugin indent on
 
