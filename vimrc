@@ -5,37 +5,34 @@
 set nocompatible " Unleash all Vim power
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/vundle'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-airline'
+Plug 'chriskempson/base16-vim'
+Plug 'danro/rename.vim'
+Plug 'godlygeek/tabular'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'lilydjwg/colorizer'
+Plug 'msanders/snipmate.vim'
+Plug 'rking/ag.vim'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/matchit.zip'
+Plug 'joshdick/onedark.vim'
+Plug 'tpope/vim-markdown'
+Plug 'mattn/emmet-vim'
+Plug 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax'
 
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'chriskempson/base16-vim'
-Plugin 'danro/rename.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'gorkunov/smartpairs.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'lilydjwg/colorizer'
-Plugin 'msanders/snipmate.vim'
-Plugin 'rking/ag.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'joshdick/onedark.vim'
-Plugin 'tpope/vim-markdown'
-Plugin 'mattn/emmet-vim'
-Plugin 'ap/vim-css-color'
-Plugin 'hail2u/vim-css3-syntax'
-
-filetype plugin indent on
+call plug#end()
 
 " ┌───────────────────────────────────┐
 " │       Plugins customizations      │
