@@ -91,9 +91,11 @@ let g:ctrlp_custom_ignore = {
 
 " vim-airline
 set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline_powerline_fonts=1
+let g:airline#extensions#syntastic#enabled=1
 let g:airline_theme = 'luna'
+let g:airline_right_sep='‹'
+let g:airline_left_sep='›'
 
 " ┌───────────────────────────────────┐
 " │             Settings              │
