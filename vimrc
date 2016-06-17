@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-easymotion'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
-Plug 'chriskempson/base16-vim'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
 Plug 'godlygeek/tabular'
 Plug 'gorkunov/smartpairs.vim'
@@ -93,6 +93,7 @@ let g:ctrlp_custom_ignore = {
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline_theme = 'luna'
 
 " ┌───────────────────────────────────┐
 " │             Settings              │
@@ -337,76 +338,6 @@ function TabToggle()
   retab!
 endfunction
 nmap <F9> mz:execute TabToggle()<CR>
-
-" RSpec focus
-function! s:Preserve(command)
-  " Save cursor position
-  let l = line(".")
-  let c = col(".")
-
-  " Do the business
-  execute a:command
-
-  " Restore cursor position
-  call cursor(l, c)
-  " Remove search history pollution and restore last search
-  call histdel("search", -1)
-  let @/ = histget("search", -1)
-endfunction
-
-function! s:AddFocusTag()
-  call s:Preserve("normal! ^ / do$\<cr>C, focus: true do\<esc>")
-endfunction
-:nnoremap <leader>a :AddFocusTag<CR>
-command! -nargs=0 AddFocusTag call s:AddFocusTag()
-
-function! s:RemoveAllFocusTags()
-  call s:Preserve("%s/, focus: true//e")
-endfunction
-:nnoremap <leader>d :RemoveAllFocusTags<CR>
-command! -nargs=0 RemoveAllFocusTags call s:RemoveAllFocusTags()
-
-function! UseSingleQuotes()
-  execute ":%s/\"/'/g"
-endfunction
-map <Leader>' :call UseSingleQuotes()<CR>
-
-function! UseDoubleQuotes()
-  execute ":%s/'/\"/g"
-endfunction
-map <Leader>" :call UseDoubleQuotes()<CR>
-
-function! OpenGemfile()
-  if filereadable("Gemfile")
-    execute ":tab drop Gemfile"
-  end
-endfunction
-map <Leader>g :call OpenGemfile()<CR>
-
-function! OpenRoutes()
-  if filereadable("config/routes.rb")
-    execute ":tab drop config/routes.rb"
-  end
-endfunction
-map <Leader>r :call OpenRoutes()<CR>
-
-function! OpenSpecHelper()
-  if filereadable("spec/spec_helper.rb")
-    execute ":tab drop spec/spec_helper.rb"
-  end
-endfunction
-map <Leader>s :call OpenSpecHelper()<CR>
-
-function! OpenFactoryFile()
-  if filereadable("spec/support/factories.rb")
-    execute ":tab drop spec/support/factories.rb"
-  else
-    if filereadable("spec/factories.rb")
-      execute ":tab drop spec/factories.rb"
-    end
-  end
-endfunction
-map <Leader>f :call OpenFactoryFile()<CR>
 
 map <Leader>v :tab drop ~/.vimrc<CR>
 
