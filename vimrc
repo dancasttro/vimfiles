@@ -32,6 +32,7 @@ Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'rstacruz/vim-closer'
+Plug 'wavded/vim-stylus'
 
 call plug#end()
 
