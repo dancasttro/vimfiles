@@ -1,5 +1,5 @@
 " ┌───────────────────────────────────┐
-" │              Vundle               │
+" │							 Vundle								│
 " └───────────────────────────────────┘
 
 set nocompatible " Unleash all Vim power
@@ -12,7 +12,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'danro/rename.vim'
-Plug 'godlygeek/tabular'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'lilydjwg/colorizer'
@@ -37,58 +36,36 @@ Plug 'wavded/vim-stylus'
 call plug#end()
 
 " ┌───────────────────────────────────┐
-" │       Plugins customizations      │
+" │				Plugins customizations			│
 " └───────────────────────────────────┘
 
 " NERDTree
 nmap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = [
-  \'\.DS_Store$',
-  \'\.bundle$',
-  \'\.capistrano$',
-  \'\.git$',
-  \'\.gitkeep$',
-  \'\.keep$',
-  \'\.routes$',
-  \'\.sass-cache$',
-  \'\.swo$',
-  \'\.swp$',
-  \'tags$'
+	\'\.DS_Store$',
+	\'\.bundle$',
+	\'\.capistrano$',
+	\'\.git$',
+	\'\.gitkeep$',
+	\'\.keep$',
+	\'\.routes$',
+	\'\.sass-cache$',
+	\'\.swo$',
+	\'\.swp$',
+	\'tags$'
 \]
 
-" Tabular
-inoremap <silent> <Bar> <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-if exists(":Tabularize")
-  nmap <Leader>t= :Tabularize /=<CR>
-  vmap <Leader>t= :Tabularize /=<CR>
-  nmap <Leader>t> :Tabularize /=><CR>
-  vmap <Leader>t> :Tabularize /=><CR>
-  nmap <Leader>t: :Tabularize /:\zs<CR>
-  vmap <Leader>t: :Tabularize /:\zs<CR>
-endif
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode = 2
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+	\ 'dir':	'\.git$\|\.hg$\|\.svn$',
+	\ 'file': '\.exe$\|\.so$\|\.dll$',
+	\ 'link': 'some_bad_symbolic_links',
+	\ }
 
 " vim-airline
 set laststatus=2
@@ -110,19 +87,15 @@ let g:airline#extensions#tabline#left_alt_sep = '›'
 
 
 " ┌───────────────────────────────────┐
-" │             Settings              │
+" │							Settings							│
 " └───────────────────────────────────┘
 
 " Completion
-autocmd FileType python     set omnifunc=pythoncomplete#Complete
+autocmd FileType python			set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
-
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType html				set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css				set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml				set omnifunc=xmlcomplete#CompleteTags
 
 " Autoindent with two spaces, always expand tabs
 set tabstop=2
@@ -171,7 +144,7 @@ vmap > >gv
 " inoremap <Right> <nop>
 
 " Highlight long lines
-" let w:m2=matchadd('Search',   '\%>100v.\+', -1)
+" let w:m2=matchadd('Search',		'\%>100v.\+', -1)
 " let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
 
 " Relative line numbers in normal mode
@@ -192,6 +165,10 @@ set splitbelow
 " Use modern ways for tracking your changes (like git), for God’s sake
 set nobackup
 set noswapfile
+
+" MapLeader
+let mapleader=","
+let g:mapleader=","
 
 " Syntastic configs
 set statusline+=%#warningmsg#
@@ -214,16 +191,16 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
 " let g:syntastic_mode_map = { 'mode': 'active',
-"                            \ 'active_filetypes': ['ruby', 'javascript', 'coffee', 'haml'],
-"                            \ 'passive_filetypes': ['html'] }
+"														 \ 'active_filetypes': ['ruby', 'javascript', 'coffee', 'haml'],
+"														 \ 'passive_filetypes': ['html'] }
 
-highlight link SyntasticErrorSign        SignColumn
-highlight link SyntasticWarningSign      SignColumn
-highlight link SyntasticStyleErrorSign   SignColumn
+highlight link SyntasticErrorSign				 SignColumn
+highlight link SyntasticWarningSign			 SignColumn
+highlight link SyntasticStyleErrorSign	 SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
 " ┌───────────────────────────────────┐
-" │               Theme               │
+" │								Theme								│
 " └───────────────────────────────────┘
 
 " Fonts for Linux
@@ -247,35 +224,33 @@ syntax on
 set list listchars=tab:»·,trail:·
 
 if has("gui_running")
-  set lines=57
-  set columns=237
-  set colorcolumn=100
+	set lines=57
+	set columns=237
+	set colorcolumn=100
 
-  " Highlight the line and the column of the current position of cursor
-  set cursorline
-  set cursorcolumn
-  hi CursorLine guibg=#222222
-  hi CursorColumn guibg=#222222
+	" Highlight the line and the column of the current position of cursor
+	set cursorline
+	set cursorcolumn
+	hi CursorLine guibg=#222222
+	hi CursorColumn guibg=#222222
 endif
 
 if has("gui_running") || $TERM == "xterm-256color"
-  set t_Co=256
-  set background=dark " light
-  " colorscheme base16-default
-  " colorscheme base16-ocean
-  colorscheme onedark
+	set t_Co=256
+	set background=dark
+	colorscheme onedark
 else
-  let g:CSApprox_loaded = 0
+	let g:CSApprox_loaded = 0
 endif
 
 " ┌───────────────────────────────────┐
-" │             Functions             │
+" │							Functions							│
 " └───────────────────────────────────┘
 
 " Removes trailing spaces
 function TrimWhiteSpace()
-  %s/\s*$//
-  ''
+	%s/\s*$//
+	''
 :endfunction
 
 map  <leader>= :call TrimWhiteSpace()<CR>
@@ -283,9 +258,9 @@ map! <leader>= :call TrimWhiteSpace()<CR>
 
 " Adds space between hash content and braces
 function AddsSpaceBetweenHashContentAndBraces()
-  silent! s/{\([^ ]\)/{ \1/
-  silent! s/\([^ ]\)}/\1 }/
-  ''
+	silent! s/{\([^ ]\)/{ \1/
+	silent! s/\([^ ]\)}/\1 }/
+	''
 :endfunction
 
 map  <leader>{ :call AddsSpaceBetweenHashContentAndBraces()<CR>
@@ -293,8 +268,8 @@ map! <leader>{ :call AddsSpaceBetweenHashContentAndBraces()<CR>
 
 " Collapse multiple blank lines (regardless of quantity) into a single blank line.
 function CollapseMultipleBlankLines()
-  g/^\_$\n\_^$/d
-  ''
+	g/^\_$\n\_^$/d
+	''
 :endfunction
 
 map  <leader>- :call CollapseMultipleBlankLines()<CR>
@@ -302,77 +277,42 @@ map! <leader>- :call CollapseMultipleBlankLines()<CR>
 
 " Invert lines
 function InvertLines()
-  g/^/m0
-  ''
+	g/^/m0
+	''
 :endfunction
 
 nnoremap <D-i> :call InvertLines()<cr>
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Bind \ (backward slash) to Ag shortcut
-nnoremap \ :Ag -i<SPACE>
-nnoremap \i :Ag<SPACE>
-
-" Bind K to search for the word under cursor
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Auto complete
-let g:stop_autocomplete=0
-
-function! CleverTab(type)
-  if a:type=='omni'
-    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-      let g:stop_autocomplete=1
-      return "\<TAB>"
-    elseif !pumvisible() && !&omnifunc
-      return "\<C-X>\<C-O>\<C-P>"
-    endif
-  elseif a:type=='keyword' && !pumvisible() && !g:stop_autocomplete
-    return "\<C-X>\<C-N>\<C-P>"
-  elseif a:type=='next'
-    if g:stop_autocomplete
-      let g:stop_autocomplete=0
-    else
-      return "\<C-N>"
-    endif
-  endif
-  return ''
-endfunction
-
-inoremap <silent><TAB> <C-R>=CleverTab('omni')<CR><C-R>=CleverTab('keyword')<CR><C-R>=CleverTab('next')<CR>
 
 " Tab toggle
 function TabToggle()
-  if &expandtab
-    set noexpandtab
-  else
-    set expandtab
-  endif
-  retab!
+	if &expandtab
+		set noexpandtab
+	else
+		set expandtab
+	endif
+	retab!
 endfunction
 nmap <F9> mz:execute TabToggle()<CR>
 
 map <Leader>v :tab drop ~/.vimrc<CR>
 
-" Search and replace selected text (http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text)
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" Mapping Y to yank from current cursor position till end of line
-noremap Y y$
 
 " Creates parent directories on save
 function s:MkNonExDir(file, buf)
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
-    if !isdirectory(dir)
-      call mkdir(dir, 'p')
-    endif
-  endif
+	if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+		let dir=fnamemodify(a:file, ':h')
+		if !isdirectory(dir)
+			call mkdir(dir, 'p')
+		endif
+	endif
 endfunction
 augroup BWCCreateDir
-  autocmd!
-  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+	autocmd!
+	autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
 " Comment out current line or selected text (maintaining visual mode after it)
@@ -380,8 +320,17 @@ vmap <D-/> gcgv
 nmap <D-/> gcc
 
 " ┌───────────────────────────────────┐
-" │             Shortcuts             │
+" │							Shortcuts							│
 " └───────────────────────────────────┘
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
@@ -392,9 +341,6 @@ nnoremap <F12> :source ~/.vimrc
 " Ctrl+L clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
 
-" Improve 'n' command (for searches)
-nmap n nzz
-nmap N Nzz
 
 " Mappings to move lines: http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <D-j> :m .+1<CR>==
@@ -414,7 +360,7 @@ vnoremap Q :norm @q<cr>
 
 
 " ┌───────────────────────────────────┐
-" │     Shortcuts for Linux (Gvim)    │
+" │			Shortcuts for Linux (Gvim)		│
 " └───────────────────────────────────┘
 
 " Ctrl+C to copy and Ctrl+P to paste
@@ -423,7 +369,7 @@ vnoremap Q :norm @q<cr>
 " nnoremap <C-P> "+p
 
 " Ctrl+S to save the current file
-nmap <c-s> :w<CR>
+nmap <leader>w :w<CR>
 imap <c-s> <Esc>:w<CR>
 
 " Management tabs
@@ -433,7 +379,7 @@ nnoremap <A-w> :q<cr>
 nnoremap <A-W> :q<cr>
 
 " ┌───────────────────────────────────┐
-" │              Aliases              │
+" │							 Aliases							│
 " └───────────────────────────────────┘
 
 cab W w
@@ -446,16 +392,16 @@ cab Tabe tab drop
 cab E e
 
 " ┌───────────────────────────────────┐
-" │        Syntax Highlighting        │
+" │				 Syntax Highlighting				│
 " └───────────────────────────────────┘
 
 
-au BufNewFile,BufRead .psqlrc      set filetype=sql
-au BufNewFile,BufRead psqlrc       set filetype=sql
-au BufNewFile,BufRead *.less       set filetype=css
+au BufNewFile,BufRead .psqlrc			 set filetype=sql
+au BufNewFile,BufRead psqlrc			 set filetype=sql
+au BufNewFile,BufRead *.less			 set filetype=css
 au BufNewFile,BufRead bash_profile set filetype=sh
-au BufNewFile,BufRead *.hbs        set filetype=html
-" au BufNewFile,BufRead *.snippet    set filetype=text
+au BufNewFile,BufRead *.hbs				 set filetype=html
+" au BufNewFile,BufRead *.snippet		 set filetype=text
 
 " Git hooks
-" au BufNewFile,BufRead applypatch-msg     set filetype=ruby
+" au BufNewFile,BufRead applypatch-msg		 set filetype=ruby
