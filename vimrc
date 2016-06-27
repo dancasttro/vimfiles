@@ -138,6 +138,7 @@ set ruler " Ruler on
 set nu " Line numbers on
 set wrap " Line wrapping on
 set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay)
+set mouse=a
 
 " Highlight all search results
 set incsearch
