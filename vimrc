@@ -1,28 +1,109 @@
-" ┌───────────────────────────────────
-" │              Vundle               │
-" └───────────────────────────────────┘
-set nocompatible " Unleash all Vim power
+" -------------------------------------
+" │             Settings              │
+" -------------------------------------
+
+set nocompatible    " Don't make vim vi-compatibile
+
+
+syntax on     " Enable syntax highlighting
+
+
+filetype plugin indent on " on   - Enable file type detection
+                " indent - Enable loading of indent file
+        " plugin - Enable loading of plugin files
+
+
+set autoindent      " Copy indent to the new line
+
+set backupdir=~/.vim/backups    " Set directory for backup files
+
+set backupskip=/tmp/*           " ┐ Don't create backups
+set backupskip+=/private/tmp/*  " ┘ for certain files
+
+set clipboard+=unnamed " Yanks go on clipboard instead.
+
+
+set directory=~/.vim/swaps      " Set directory for swap files
+set encoding=utf-8 nobomb       " Use UTF-8 without BOM
+set history=5000                " Increase command line history
+set hlsearch                    " Enable search highlighting
+set ignorecase                  " Ignore case in search patterns
+
+set incsearch                   " Highlight search pattern as
+                                " it is being typed
+
+set laststatus=2                " Always show the status line
+
+
+set listchars=tab:▸\            " ┐
+set listchars+=trail:·          " │ Use custom symbols to
+set listchars+=eol:↴            " │ represent invisible characters
+set listchars+=nbsp:_           " ┘
+
+set mousehide                   " Hide mouse pointer while typing
+set mouse=a                     " Enable mouse
+
+set nostartofline               " Kept the cursor on the same column
+set number                      " Show line number
+
+
+set showmode                    " Show current mode
+set spelllang=en_us             " Set the spellchecking language
+
+
+set tabstop=2                   " ┐
+set softtabstop=2               " │ Set global <TAB> settings
+set shiftwidth=2                " │ http://vimcasts.org/e/2
+set expandtab                   " ┘
+
+
+set ttyfast                     " Enable fast terminal connection
+set undodir=~/.vim/undos        " Set directory for undo files
+set undofile                    " Automatically save undo history
+
+set wrap                        " Line wrapping on
+
+set hidden
+set ffs=unix,dos,mac
+
+set splitright                  " Open splits at right side (and below)
+set splitbelow
+
+" set ruler                       " Show cursor position
+" set colorcolumn=73              " Highlight certain column(s)
+
+
+autocmd FileType python     set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+
+" ------------------------------------------------------------------------------
+" │ Plug                                                                       │
+" ------------------------------------------------------------------------------
+
 filetype off
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'Lokaltog/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'godlygeek/tabular'
 Plug 'gorkunov/smartpairs.vim'
+Plug 'shougo/neocomplcache.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'lilydjwg/colorizer'
+" Plug 'lilydjwg/colorizer'
 Plug 'msanders/snipmate.vim'
 Plug 'rking/ag.vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/matchit.zip'
 Plug 'joshdick/onedark.vim'
@@ -32,6 +113,9 @@ Plug 'ap/vim-css-color'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'rstacruz/vim-closer'
 Plug 'wavded/vim-stylus'
+Plug 'othree/html5.vim'
+Plug 'shutnik/jshint2.vim'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -39,8 +123,7 @@ call plug#end()
 " │       Plugins customizations      │
 " └───────────────────────────────────┘
 
-" NERDTree
-nmap <F2> :NERDTreeToggle<CR>
+" nmap <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = [
   \'\.DS_Store$',
@@ -68,7 +151,6 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " vim-airline
-set laststatus=2
 let g:airline_powerline_fonts=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline_left_sep='›'
@@ -86,123 +168,52 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep = '›'
 let g:airline#extensions#tabline#left_alt_sep = '›'
 
-" Emmet
-"let g:user_emmet_leader_key='<tab>'
-let g:user_emmet_mode='n'
-let g:user_emmet_mode='inv'
-let g:user_emmet_mode='a'
+" ----------------------------------------------------------------------
+" | Plugins - Emmet                                                    |
+" ----------------------------------------------------------------------
+
+let g:user_emmet_leader_key='<C-Y>'
 
 let g:user_emmet_install_global=0
 autocmd FileType html,css EmmetInstall
 
-" ┌───────────────────────────────────┐
-" │             Settings              │
-" └───────────────────────────────────┘
 
-filetype indent on
+" ----------------------------------------------------------------------
+" | Plugins - Markdown                                                 |
+" ----------------------------------------------------------------------
 
-" Completion
-autocmd FileType python     set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+" Disable Folding
+" https://github.com/plasticboy/vim-markdown#disable-folding
 
-" Autoindent with two spaces, always expand tabs
-set tabstop=2
-set shiftwidth=2
-set expandtab
+let g:vim_markdown_folding_disabled=1
 
-set encoding=utf8
 
-set hidden
-set ffs=unix,dos,mac
+" ----------------------------------------------------------------------
+" | Plugins - NeoComplCache                                            |
+" ----------------------------------------------------------------------
 
-" Folding settings
-set nofoldenable
+" Enable `neocomplcache` by default
+" https://github.com/Shougo/neocomplcache.vim#installation
 
-set wildmode=list:longest " make cmdline tab completion similar to bash
-set wildmenu " enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ " stuff to ignore when tab completing
+let g:neocomplcache_enable_at_startup=1
 
-" Vertical / horizontal scroll off settings
-set scrolloff=3
-set sidescrolloff=7
-set sidescroll=1
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-set cf " Enable error files & error jumping.
-set clipboard+=unnamed " Yanks go on clipboard instead.
-set history=256 " Number of things to remember in history.
-set autowrite " Writes on make/shell commands
-set ruler " Ruler on
-set nu " Line numbers on
-set wrap " Line wrapping on
-set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay)
-set mouse=a
+" Make `<TAB>` autocomplete
 
-" Highlight all search results
-set incsearch
-set hlsearch
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-"" Vmap for maintain Visual Mode after shifting > and <
-vmap < <gv
-vmap > >gv
 
-" Forcing the use of hjkl keys to navigate
-" noremap <Up> <nop>
-" noremap <Down> <nop>
-" noremap <Left> <nop>
-" noremap <Right> <nop>
-" inoremap <Up> <nop>
-" inoremap <Down> <nop>
-" inoremap <Left> <nop>
-" inoremap <Right> <nop>
+" ----------------------------------------------------------------------
+" | Plugins - Syntastic                                                |
+" ----------------------------------------------------------------------
 
-" Highlight long lines
-" let w:m2=matchadd('Search',   '\%>100v.\+', -1)
-" let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+" Inform Syntastic which checkers to use based on file types
+" https://github.com/scrooloose/syntastic#3-faq
 
-" Relative line numbers in normal mode
-" set rnu
-" au InsertEnter * :set nu
-" au InsertLeave * :set rnu
-" au FocusLost * :set nu
-" au FocusGained * :set rnu
+let g:syntastic_html_checkers = [ 'jshint' ]
+let g:syntastic_javascript_checkers = [ 'jshint' ]
 
-let mapleader=","
-let g:mapleader=","
-nmap <leader>w :w!<CR>
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" Useful mappings for managing tabs
-nmap <leader>tn :tabnew<CR>
-"nmap <leader>to :tabonly<CR>
-"nmap <leader>tc :tabclose<CR>
-
-" Ignore case in searches
-set ignorecase
-
-" Open splits at right side (and below)
-set splitright
-set splitbelow
-
-" Never ever let Vim write a backup file! They did that in the 70’s.
-" Use modern ways for tracking your changes (like git), for God’s sake
-set nobackup
-set noswapfile
-
-" Syntastic configs
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -213,187 +224,252 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '🤔'
-let g:syntastic_warning_symbol = '😱'
-let g:syntastic_style_warning_symbol = '💩'
+" Disable syntax checking by default
+let g:syntastic_mode_map = {
+    \ 'active_filetypes': [],
+    \ 'mode': 'ative',
+    \ 'passive_filetypes': ['html']
+\}
 
 
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_html_tidy_exec = 'tidy5'
-let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
-" let g:syntastic_mode_map = { 'mode': 'active',
-"                            \ 'active_filetypes': ['ruby', 'javascript', 'coffee', 'haml'],
-"                            \ 'passive_filetypes': ['html'] }
+" ----------------------------------------------------------------------
+" | Plugins - Airline                                                  |
+" ----------------------------------------------------------------------
 
-highlight link SyntasticErrorSign        SignColumn
-highlight link SyntasticWarningSign      SignColumn
-highlight link SyntasticStyleErrorSign   SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
+let g:airline_powerline_fonts=1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline_left_sep='›'
+let g:airline_right_sep='‹'
 
-" ┌───────────────────────────────────┐
-" │               Theme               │
-" └───────────────────────────────────┘
-
-" Fonts for Linux
-" set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
-" set guifont=Monospace\ 10
-
-" Fonts for Mac
-" set guifont=Monaco\ for\ Powerline:h15
-" set guifont=Menlo\ Regular:h16
-" set guifont=Hack:h15
-" set guifont=Anonymous\ Pro:h17
-" set guifont=Inconsolata-dz:h17
-set guifont=Roboto\ Mono\ for\ Powerline:h15
-
-" Don't show the top bar
-set guioptions-=T
-
-" Syntax on
-syntax enable
-
-colorscheme onedark
-
-set list listchars=tab:»·,trail:·
+let g:airline#extensions#branch#enabled=1
+let g:airline_symbols = {}
+let g:airline_left_alt_sep = '>'
+let g:airline_right_alt_sep = '<'
+let g:airline_symbols.branch = '›'
+let g:airline_symbols.readonly = '‹'
+let g:airline_symbols.linenr = '‹'
+let g:airline_symbols.paste = 'ρ'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep = '›'
+let g:airline#extensions#tabline#left_alt_sep = '›'
 
 
-if has("gui_running")
-  set t_Co=256
-  set background=dark " light
-else
-  set background=light
-endif
-" ┌───────────────────────────────────┐
-" │             Functions             │
-" └───────────────────────────────────┘
+" ----------------------------------------------------------------------
+" | Plugins - CtrlP                                                    |
+" ----------------------------------------------------------------------
 
-" Removes trailing spaces
-function TrimWhiteSpace()
-  %s/\s*$//
-  ''
-:endfunction
-
-map  <leader>= :call TrimWhiteSpace()<CR>
-map! <leader>= :call TrimWhiteSpace()<CR>
-
-" Adds space between hash content and braces
-function AddsSpaceBetweenHashContentAndBraces()
-  silent! s/{\([^ ]\)/{ \1/
-  silent! s/\([^ ]\)}/\1 }/
-  ''
-:endfunction
-
-map  <leader>{ :call AddsSpaceBetweenHashContentAndBraces()<CR>
-map! <leader>{ :call AddsSpaceBetweenHashContentAndBraces()<CR>
-
-" Collapse multiple blank lines (regardless of quantity) into a single blank line.
-function CollapseMultipleBlankLines()
-  g/^\_$\n\_^$/d
-  ''
-:endfunction
-
-map  <leader>- :call CollapseMultipleBlankLines()<CR>
-map! <leader>- :call CollapseMultipleBlankLines()<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_max_height = 10
+let g:ctrlp_working_path_mode = 2
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 
-autocmd BufWritePre * :%s/\s\+$//e
 
-" Bind \ (backward slash) to Ag shortcut
-"nnoremap \ :Ag -i<SPACE>
-"nnoremap \i :Ag<SPACE>
+" ----------------------------------------------------------------------
+" | Plugins - NerdTree                                                 |
+" ----------------------------------------------------------------------
 
-" Bind K to search for the word under cursor
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+" nmap <F2> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = [
+  \'\.DS_Store$',
+  \'\.bundle$',
+  \'\.capistrano$',
+  \'\.git$',
+  \'\.gitkeep$',
+  \'\.keep$',
+  \'\.routes$',
+  \'\.sass-cache$',
+  \'\.swo$',
+  \'\.swp$',
+  \'tags$'
+\]
 
 
-" Tab toggle
-function TabToggle()
-  if &expandtab
-    set noexpandtab
-  else
-    set expandtab
-  endif
-  retab!
+" ----------------------------------------------------------------------
+" | Helper Functions                                                   |
+" ----------------------------------------------------------------------
+
+function! StripTrailingWhitespaces()
+
+    " Save last search and cursor position
+    let searchHistory = @/
+    let cursorLine = line('.')
+    let cursorColumn = col('.')
+
+    " Strip trailing whitespaces
+    %s/\s\+$//e
+
+    " Restore previous search history and cursor position
+    let @/ = searchHistory
+    call cursor(cursorLine, cursorColumn)
+
 endfunction
-nmap <F9> mz:execute TabToggle()<CR>
 
-map <Leader>v :tab drop ~/.vimrc<CR>
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" Search and replace selected text (http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text)
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" ----------------------------------------------------------------------
+" | Automatic Commands                                                 |
+" ----------------------------------------------------------------------
 
-" Mapping Y to yank from current cursor position till end of line
-noremap Y y$
+if has('autocmd')
 
+    " Automatically strip the trailing whitespaces when files are saved
 
-" ┌───────────────────────────────────┐
-" │             Shortcuts             │
-" └───────────────────────────────────┘
+    augroup strip_trailing_whitespaces
 
-"" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
+        " List of file types that use the trailing whitespaces:
+        "
+        "  * Markdown
+        "    https://daringfireball.net/projects/markdown/syntax#block
 
-" Ctrl+R reloads the ~/.vimrc file
-nnoremap <F12> :source ~/.vimrc
+        let excludedFileTypes = [ 'mkd.markdown' ]
 
-" Ctrl+L clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
+        " Only strip the trailing whitespaces if the file type is
+        " not in the excluded file types list
 
-" Improve 'n' command (for searches)
-nmap n nzz
-nmap N Nzz
+        autocmd!
+        autocmd BufWritePre * if index(excludedFileTypes, &ft) < 0 | :call StripTrailingWhitespaces()
 
-" Mappings to move lines: http://vim.wikia.com/wiki/Moving_lines_up_or_down
-nnoremap <D-j> :m .+1<CR>==
-nnoremap <D-k> :m .-2<CR>==
-inoremap <D-j> <Esc>:m .+1<CR>==gi
-inoremap <D-k> <Esc>:m .-2<CR>==gi
-vnoremap <D-j> :m '>+1<CR>gv=gv
-vnoremap <D-k> :m '<-2<CR>gv=gv
+    augroup END
 
-" A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
-" This lets you use w!! to do that after you opened the file already:
-cmap w!! w !sudo tee % >/dev/null
+endif
 
-" Sets Q to apply @q macros
-nnoremap Q @q
-vnoremap Q :norm @q<cr>
+" ----------------------------------------------------------------------
+" | Color Scheme                                                       |
+" ----------------------------------------------------------------------
+
+set t_Co=256                        " Enable full-color support
+
+set background=dark                 " Use colors that look good
+                                    " on a dark background
+
+colorscheme onedark                 " Use custom color scheme
 
 
-" Ctrl+S to save the current file
-nmap <c-s> :w<CR>
-imap <c-s> <Esc>:w<CR>
+" ----------------------------------------------------------------------
+" | Key Mappings                                                       |
+" ----------------------------------------------------------------------
+
+" Use a different mapleader (default is '\')
+let mapleader = ','
+let g:mapleader=","
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,w] Save file
+nmap <leader>w :w!<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,l] Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,h] Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,t ] Toggle NERDTree
+map <leader>t :NERDTreeToggle<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,ts] Toggle Syntastic
+nmap <leader>ts :SyntasticToggleMode<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" [,cc] Toggle code comments
+" https://github.com/tomtom/tcomment_vim
+map <leader>cc :TComment<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-" Management tabs
-nnoremap <A-w> :q<cr>
-nnoremap <A-W> :q<cr>
+" [,ss] Strip trailing whitespace
+nmap <leader>ss :call StripTrailingWhitespaces()<CR>
 
-" ┌───────────────────────────────────┐
-" │              Aliases              │
-" └───────────────────────────────────┘
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-cab W w
-cab Q q
-cab Wq wq
-cab wQ wq
-cab WQ wq
-cab tabe tab drop
-cab Tabe tab drop
-cab E e
-
-" ┌───────────────────────────────────┐
-" │        Syntax Highlighting        │
-" └───────────────────────────────────┘
+" [,j ] JSHint the code
+" https://github.com/Shutnik/jshint2.vim
+nmap <leader>j :JSHint<CR>
 
 
-au BufNewFile,BufRead .psqlrc      set filetype=sql
-au BufNewFile,BufRead psqlrc       set filetype=sql
-au BufNewFile,BufRead *.less       set filetype=css
-au BufNewFile,BufRead bash_profile set filetype=sh
-au BufNewFile,BufRead *.hbs        set filetype=html
-" au BufNewFile,BufRead *.snippet    set filetype=text
+" ----------------------------------------------------------------------
+" | Status Line                                                        |
+" ----------------------------------------------------------------------
 
-" Git hooks
-" au BufNewFile,BufRead applypatch-msg     set filetype=ruby
+" Terminal types:
+"
+"   1) term  (normal terminals, e.g.: vt100, xterm)
+"   2) cterm (color terminals, e.g.: MS-DOS console, color-xterm)
+"   3) gui   (GUIs)
+
+highlight ColorColumn
+    \ term=NONE
+    \ cterm=NONE  ctermbg=237    ctermfg=NONE
+    \ gui=NONE    guibg=#073642  guifg=NONE
+
+highlight CursorLine
+    \ term=NONE
+    \ cterm=NONE  ctermbg=235  ctermfg=NONE
+    \ gui=NONE    guibg=#073642  guifg=NONE
+
+highlight CursorLineNr
+    \ term=bold
+    \ cterm=bold  ctermbg=NONE   ctermfg=178
+    \ gui=bold    guibg=#073642  guifg=Orange
+
+highlight LineNr
+    \ term=NONE
+    \ cterm=NONE  ctermfg=241    ctermbg=NONE
+    \ gui=NONE    guifg=#839497  guibg=#073642
+
+highlight User1
+    \ term=NONE
+    \ cterm=NONE  ctermbg=237    ctermfg=Grey
+    \ gui=NONE    guibg=#073642  guifg=#839496
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+set statusline=
+set statusline+=%1*            " User1 highlight
+set statusline+=\ [%n]         " Buffer number
+set statusline+=\ %{GetGitBranchName()} " Git branch name
+set statusline+=\ [%f]         " Path to the file
+set statusline+=%m             " Modified flag
+set statusline+=%r             " Readonly flag
+set statusline+=%h             " Help file flag
+set statusline+=%w             " Preview window flag
+set statusline+=%y             " File type
+set statusline+=[
+set statusline+=%{&ff}         " File format
+set statusline+=:
+set statusline+=%{strlen(&fenc)?&fenc:'none'} " File encoding
+set statusline+=]
+set statusline+=%=             " Left/Right separator
+set statusline+=%c             " File encoding
+set statusline+=,
+set statusline+=%l             " Current line number
+set statusline+=/
+set statusline+=%L             " Total number of lines
+set statusline+=\ (%P)\        " Percent through file
+
+" Example result:
+"
+"  [1] [master] [vim/vimrc][vim][unix:utf-8]            17,238/381 (59%)
