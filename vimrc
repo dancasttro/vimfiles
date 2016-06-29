@@ -73,12 +73,6 @@ set splitbelow
 " set colorcolumn=73              " Highlight certain column(s)
 
 
-autocmd FileType python     set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
-
 " ------------------------------------------------------------------------------
 " │ Plug                                                                       │
 " ------------------------------------------------------------------------------
@@ -196,6 +190,13 @@ let g:vim_markdown_folding_disabled=1
 " https://github.com/Shougo/neocomplcache.vim#installation
 
 let g:neocomplcache_enable_at_startup=1
+
+" Enable omni completion.
+autocmd FileType css            setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python         setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
