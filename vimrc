@@ -358,7 +358,7 @@ colorscheme onedark                 " Use custom color scheme
 " ----------------------------------------------------------------------
 
 " Use a different mapleader (default is '\')
-let mapleader = ','
+let mapleader=","
 let g:mapleader=","
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
