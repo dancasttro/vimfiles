@@ -16,15 +16,12 @@ filetype plugin indent on " on   - Enable file type detection
 set autoindent      " Copy indent to the new line
 set autoread
 
-set backupdir=~/.vim/backups    " Set directory for backup files
-
-set backupskip=/tmp/*           " ┐ Don't create backups
-set backupskip+=/private/tmp/*  " ┘ for certain files
+set nobackup
+set nowb
+set noswapfile
 
 set clipboard+=unnamed " Yanks go on clipboard instead.
 
-
-set directory=~/.vim/swaps      " Set directory for swap files
 set encoding=utf-8 nobomb       " Use UTF-8 without BOM
 set history=5000                " Increase command line history
 set hlsearch                    " Enable search highlighting
