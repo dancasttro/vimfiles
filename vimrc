@@ -92,7 +92,6 @@ Plug 'godlygeek/tabular'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'shougo/neocomplcache.vim'
 Plug 'kien/ctrlp.vim'
-" Plug 'lilydjwg/colorizer'
 Plug 'msanders/snipmate.vim'
 Plug 'rking/ag.vim'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -117,51 +116,6 @@ call plug#end()
 " ┌───────────────────────────────────┐
 " │       Plugins customizations      │
 " └───────────────────────────────────┘
-
-" nmap <F2> :NERDTreeToggle<CR>
-let NERDTreeShowHidden = 1
-let NERDTreeIgnore = [
-  \'\.DS_Store$',
-  \'\.bundle$',
-  \'\.capistrano$',
-  \'\.git$',
-  \'\.gitkeep$',
-  \'\.keep$',
-  \'\.routes$',
-  \'\.sass-cache$',
-  \'\.swo$',
-  \'\.swp$',
-  \'tags$'
-\]
-
-" CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_max_height = 10
-let g:ctrlp_working_path_mode = 2
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-" vim-airline
-let g:airline_powerline_fonts=1
-let g:airline#extensions#syntastic#enabled=1
-let g:airline_left_sep='›'
-let g:airline_right_sep='‹'
-
-let g:airline#extensions#branch#enabled=1
-let g:airline_symbols = {}
-let g:airline_left_alt_sep = '>'
-let g:airline_right_alt_sep = '<'
-let g:airline_symbols.branch = '›'
-let g:airline_symbols.readonly = '‹'
-let g:airline_symbols.linenr = '‹'
-let g:airline_symbols.paste = 'ρ'
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#left_sep = '›'
-let g:airline#extensions#tabline#left_alt_sep = '›'
 
 " ----------------------------------------------------------------------
 " | Plugins - Emmet                                                    |
@@ -281,6 +235,9 @@ let g:ctrlp_custom_ignore = {
 " ----------------------------------------------------------------------
 
 " nmap <F2> :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeMinimalUI = 1
+let NERDTreeMouseMode=2
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = [
   \'\.DS_Store$',
