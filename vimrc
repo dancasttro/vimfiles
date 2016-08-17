@@ -14,6 +14,7 @@ filetype plugin indent on " on   - Enable file type detection
 
 
 set autoindent      " Copy indent to the new line
+set autoread
 
 set backupdir=~/.vim/backups    " Set directory for backup files
 
