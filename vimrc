@@ -110,6 +110,7 @@ Plug 'wavded/vim-stylus'
 Plug 'othree/html5.vim'
 Plug 'shutnik/jshint2.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'stephenway/postcss.vim'
 
 call plug#end()
 
