@@ -32,6 +32,9 @@ set incsearch                   " Highlight search pattern as
 
 set laststatus=2                " Always show the status line
 
+set title
+set titleold="Terminal"
+set titlestring=%F
 
 set listchars=tab:▸\            " ┐
 set listchars+=trail:·          " │ Use custom symbols to
@@ -40,6 +43,7 @@ set listchars+=nbsp:_           " ┘
 
 set mousehide                   " Hide mouse pointer while typing
 set mouse=a                     " Enable mouse
+set mousemodel=popup
 
 set nostartofline               " Kept the cursor on the same column
 set number                      " Show line number
@@ -145,8 +149,14 @@ let g:vim_markdown_folding_disabled=1
 
 " Enable `neocomplcache` by default
 " https://github.com/Shougo/neocomplcache.vim#installation
-
-let g:neocomplcache_enable_at_startup=1
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Enable omni completion.
 autocmd FileType css            setlocal omnifunc=csscomplete#CompleteCSS
@@ -216,17 +226,13 @@ let g:airline#extensions#tabline#left_alt_sep = '›'
 " | Plugins - CtrlP                                                    |
 " ----------------------------------------------------------------------
 
+set wildmode=list:longest,list:full
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.git
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_max_height = 10
 let g:ctrlp_working_path_mode = 2
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$\|\.dll$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
+let g:ctrlp_use_caching = 1
 
 " ----------------------------------------------------------------------
 " | Plugins - NerdTree                                                 |

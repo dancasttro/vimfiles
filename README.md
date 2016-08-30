@@ -8,42 +8,23 @@
 Clone this repository into your home directory as `~/.vim` and then install the plugins. Such as:
 
     git clone https://github.com/dancasttro/vimfiles.git ~/.vim
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ln -s ~/.vim/vimrc ~/.vimrc
-    vim +PluginInstall +qall
+    run vim
+    :PlugInstall
 
-**Optional:**
-
-(OS X only) Copy the Monaco font:
-
-    cp ~/.vim/fonts/Monaco+for+Powerline.otf ~/Library/Fonts/
 
 Install jshint, in order to review your JavaScript code:
 
     sudo npm install -g jshint
     sudo npm install -g coffeelint
 
-## Color Schemes
-
-* base16-ocean *(current)*
-* Other ["base16" themes](http://chriskempson.github.io/base16/)
-
-## Fonts
-
-These are my favorite fonts:
-
-* Monaco *(my current one)*
-* Anonymous Pro
-* Inconsolata-dz
-* Bitstream Vera Sans Mono
 
 ## Plugins
 
 | Plugin                                                              | Description                                                         | Interesting links                  |
 | :------------------------------------------------------------------ | :------------------------------------------------------------------ | :--------------------------------- |
 | [Ag.vim](https://github.com/rking/ag.vim)                           | Plugin for ag (the_silver_searcher)                                 |                                    |
-| [Base16](https://github.com/chriskempson/base16-vim)                | Amazing colorschema                                                 |                                    |
-| [Colorizer](https://github.com/lilydjwg/colorizer)                  | Colorize all text in the form #rrggbb or #rgb                       |                                    |
 | [CtrlP](https://github.com/kien/ctrlp.vim)                          | Full path fuzzy file, buffer, mru and tag finder                    | [Website](http://goo.gl/nUQ1lA)    |
 | [Fugitive](https://github.com/tpope/vim-fugitive)                   | A git wrapper so awesome, it should be illegal                      |                                    |
 | [Matchit.zip](https://github.com/vim-scripts/matchit.zip)           | Extended % matching for HTML, LaTeX, and many other languages       |                                    |
